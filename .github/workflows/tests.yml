@@ -34,4 +34,3 @@ jobs:
 
       - name: Run UI tests
         run: pytest test_login_pom.py test_inventory.py -v
-EOF
