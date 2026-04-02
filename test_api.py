@@ -55,6 +55,20 @@ def test_update_post():
     assert response.status_code == 200
     assert data["title"] == "Updated Title"
 
+@pytest.mark.xfail(reason="JSONPlaceholder echoes unknown fields back in response - API should reject or ignore unknown fields")
+def test_update_post_with_invalid_fields():
+    payload = {
+        "title": "Updated Title",
+        "body": "Updated body",
+        "userId": 1,
+        "blah": "test"        # unknown field
+    }
+    response = requests.put(f"{BASE_URL}/posts/1", json=payload)
+    data = response.json()
+
+    assert response.status_code == 200
+    assert "blah" not in data
+
 def test_delete_post():
     response = requests.delete(f"{BASE_URL}/posts/1")
     assert response.status_code == 200
