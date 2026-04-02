@@ -20,11 +20,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: |
-          pip install pytest
-          pip install playwright
-          pip install pytest-playwright
-          pip install requests
+        run: pip install -r requirements.txt
 
       - name: Install Playwright browsers
         run: playwright install --with-deps chromium
